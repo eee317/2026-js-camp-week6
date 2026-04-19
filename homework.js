@@ -56,11 +56,13 @@ async function getProductsSafe() {
 	// 4. 失敗回傳 { success: false, error: '錯誤訊息' }
 	try {
 		const res = await fetch(`${BASE_URL}/api/livejs/v1/customer/${API_PATH}/products`);
-		if (!res.status) {
+		const data = await res.json();
+
+		if (!res.ok) {
 			throw new Error(`HTTP error! status: ${res.status}`);
 		}
-		const data = await res.json();
-		return { success: res.status, data: data.products };
+
+		return { success: true, data: data.products };
 	} catch (error) {
 		return { success: false, error: error.message };
 	}
