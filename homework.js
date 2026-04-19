@@ -40,7 +40,11 @@ async function getCart() {
 	// 請實作此函式
 	const res = await fetch(`${BASE_URL}/api/livejs/v1/customer/${API_PATH}/carts`);
 	const data = await res.json();
-	return data;
+	return {
+		carts: data.carts,
+		total: data.total,
+		finalTotal: data.finalTotal
+	};
 }
 
 /**
